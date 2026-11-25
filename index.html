@@ -151,6 +151,16 @@ th{font-size:15px;color:var(--mute);font-weight:500}
 .sos span{font-size:16px;color:#ffd9cf}
 footer{padding:24px max(5vw,16px);font-size:14px;color:var(--mute);text-align:center}
 @media(max-width:600px){body{font-size:17px}.day{grid-template-columns:56px minmax(0,1fr);gap:12px}.day .n{font-size:32px}table{font-size:15px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:6em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:5.5em;margin-inline-start:-6em;color:var(--mute);font-weight:400}}
+.m3d{margin-top:22px;scroll-margin-top:90px}
+.m3d-head{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.m3d-head h3{margin:0}
+.m3d-btns{display:flex;gap:8px;flex-wrap:wrap}
+.m3d-btns button,.go3d{min-height:44px;padding:8px 16px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:500 16px "Noto Sans KR",sans-serif;cursor:pointer}
+.go3d{margin-top:10px}
+.m3d-box{position:relative;height:min(70vh,560px);border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#0b1a24}
+.m3d-box gmp-map-3d{display:block;width:100%;height:100%}
+.m3d-msg{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:#e8f1f5;font-size:17px;line-height:1.6}
+.m3d-msg[hidden]{display:none}
 </style>
 <script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
 </head>
@@ -253,6 +263,19 @@ footer{padding:24px max(5vw,16px);font-size:14px;color:var(--mute);text-align:ce
       </div>
     </div>
     <p class="note" id="mapnote"></p>
+    <div class="m3d" id="m3d">
+      <div class="m3d-head">
+        <h3 id="m3dtitle">3D로 둘러보기</h3>
+        <div class="m3d-btns">
+          <button type="button" id="m3dspin">한 바퀴 돌아보기</button>
+          <button type="button" id="m3dstop">멈추기</button>
+        </div>
+      </div>
+      <div class="m3d-box" id="m3dbox">
+        <div class="m3d-msg" id="m3dmsg"><div>위 지도에서 장소를 고른 뒤 <b>&nbsp;3D로 보기&nbsp;</b>를 누르면 실제 모습을 입체로 볼 수 있습니다.</div></div>
+      </div>
+      <p class="note">마우스로 끌면 회전, 휠(또는 두 손가락)로 확대·축소합니다. 방콕처럼 3D 건물 자료가 있는 곳은 건물이 입체로 보이고, 나머지 지역은 위성사진 위에 산과 지형만 입체로 보입니다.</p>
+    </div>
   </div>
 </section>
 
@@ -513,7 +536,8 @@ let cur='th';
 function sel(i){
   const p=MAPS[cur].pins[i];
   info.style.setProperty('--c',COL[p.c]);
-  info.innerHTML=`<span class="tag" style="--c:${COL[p.c]}">${CAT[p.c]}</span><h3>${i+1}. ${p.n}</h3><p>${p.d}</p>`;
+  info.innerHTML=`<span class="tag" style="--c:${COL[p.c]}">${CAT[p.c]}</span><h3>${i+1}. ${p.n}</h3><p>${p.d}</p><button type="button" class="go3d">3D로 보기</button>`;
+  info.querySelector('.go3d').onclick=()=>document.dispatchEvent(new CustomEvent('go3d',{detail:{k:cur,i,n:p.n}}));
   fig.querySelectorAll('.pin').forEach((g,j)=>g.classList.toggle('on',j===i));
   list.querySelectorAll('button').forEach((b,j)=>b.setAttribute('aria-current',j===i));
 }
@@ -533,6 +557,100 @@ list.addEventListener('click',e=>{const b=e.target.closest('button');if(b)sel(+b
 const mb=[...document.querySelectorAll('[data-m]')];
 mb.forEach(b=>b.addEventListener('click',()=>{mb.forEach(x=>x.setAttribute('aria-pressed',x===b));show(b.dataset.m)}));
 show('th');
+}
+</script>
+<script>
+/* ===== 3D 지도 (Google Photorealistic 3D Maps) =====
+   아래 따옴표 안에 구글 지도 API 키를 붙여 넣으세요. 비워 두면 3D 지도는 안내 문구만 보입니다. */
+const MAPS_KEY = '';
+
+{
+/* 장소별 실제 좌표 [위도, 경도] — 위 지도의 핀 이름과 같아야 합니다 */
+const GEO={
+ th:{'방콕':[13.7563,100.5018],'아유타야':[14.3559,100.5583],'치앙마이':[18.7883,98.9853],'푸껫':[7.8846,98.3880],
+  '수코타이':[17.0170,99.7036],'치앙라이':[19.9105,99.8406],'깐짜나부리':[14.0409,99.5036],'롭부리':[14.8023,100.6143],
+  '담넌사두억':[13.5195,99.9592],'매홍손':[19.3020,97.9654],'빠이':[19.3583,98.4401],'카오야이 국립공원':[14.4390,101.3720],
+  '붉은 연꽃 호수(우돈타니)':[17.2450,103.0400],'카오속 국립공원':[8.9139,98.5297],'파타야':[12.9236,100.8825],
+  '후아힌':[12.5684,99.9577],'코사무이':[9.5120,100.0136],'끄라비':[8.0300,98.8230]},
+ bk:{'왕궁':[13.7500,100.4913],'왓포':[13.7465,100.4927],'왓아룬(새벽사원)':[13.7437,100.4888],'카오산 로드':[13.7590,100.4974],
+  '차이나타운(야오와랏)':[13.7406,100.5098],'아이콘시암':[13.7266,100.5101],'아시아티크':[13.7046,100.5035],
+  '시암(쇼핑가)':[13.7457,100.5341],'룸피니 공원':[13.7314,100.5414],'짜뚜짝 주말시장':[13.7999,100.5505]},
+ cm:{'도이수텝 사원':[18.8048,98.9216],'왓프라싱':[18.7884,98.9817],'왓체디루앙':[18.7870,98.9867],'타패 게이트':[18.7877,98.9933],
+  '와로롯 시장':[18.7905,99.0005],'나이트 바자':[18.7850,99.0006],'님만해민':[18.7990,98.9680],'치앙마이 공항':[18.7668,98.9626]},
+ hk:{'푸껫 올드타운':[7.8846,98.3880],'빅 부다':[7.8275,98.3128],'찰롱 사원':[7.8467,98.3366],'빠똥 해변':[7.8960,98.2960],
+  '까따 해변':[7.8205,98.2980],'프롬텝 곶':[7.7628,98.3054],'라사다 선착장':[7.8573,98.4005],'피피섬':[7.7407,98.7784],
+  '푸껫 공항':[8.1132,98.3169]}
+};
+/* 지역별 카메라 거리(m): 태국 전체 핀은 도시 단위라 멀리, 도시 지도 핀은 가까이 */
+const RANGE={th:4000,bk:700,cm:900,hk:1500};
+
+const box=document.getElementById('m3dbox'),msg=document.getElementById('m3dmsg'),title=document.getElementById('m3dtitle');
+let map=null,loading=null,last=null,markers=[];
+
+function say(html){msg.innerHTML='<div>'+html+'</div>';msg.hidden=false}
+
+function load(){
+  if(loading)return loading;
+  loading=new Promise((ok,fail)=>{
+    window.__m3dReady=ok;
+    window.gm_authFailure=()=>say('API 키가 올바르지 않거나 이 주소(leejk37.github.io)에서 쓰도록 허용되지 않았습니다.<br>구글 클라우드 콘솔에서 키 설정을 확인해 주세요.');
+    const sc=document.createElement('script');
+    sc.src='https://maps.googleapis.com/maps/api/js?key='+encodeURIComponent(MAPS_KEY)+'&v=beta&libraries=maps3d&language=ko&region=KR&callback=__m3dReady';
+    sc.async=true;
+    sc.onerror=()=>fail(new Error('load'));
+    document.head.append(sc);
+  });
+  return loading;
+}
+
+async function ensureMap(){
+  if(map)return map;
+  await load();
+  const {Map3DElement}=await google.maps.importLibrary('maps3d');
+  map=new Map3DElement({center:{lat:13.7563,lng:100.5018,altitude:0},range:6000,tilt:60,heading:0,mode:'HYBRID'});
+  box.append(map);
+  return map;
+}
+
+async function drawMarkers(k){
+  const {Marker3DElement}=await google.maps.importLibrary('maps3d');
+  markers.forEach(m=>m.remove());
+  markers=Object.entries(GEO[k]).map(([n,[lat,lng]],i)=>{
+    const m=new Marker3DElement({position:{lat,lng,altitude:60},altitudeMode:'RELATIVE_TO_GROUND',extruded:true,label:(i+1)+'. '+n});
+    map.append(m);return m;
+  });
+}
+
+function camera(k,n){
+  const [lat,lng]=GEO[k][n];
+  return {center:{lat,lng,altitude:0},range:RANGE[k],tilt:65,heading:0};
+}
+
+async function go(k,n){
+  const g=GEO[k]&&GEO[k][n];
+  if(!g){say('이 장소의 좌표가 아직 없습니다.');return}
+  document.getElementById('m3d').scrollIntoView({behavior:'smooth',block:'start'});
+  title.textContent='3D로 둘러보기 · '+n;
+  if(!MAPS_KEY){say('3D 지도를 보려면 구글 지도 API 키가 필요합니다.<br>index.html의 <b>&nbsp;const MAPS_KEY&nbsp;</b> 줄에 키를 넣어 주세요.');return}
+  try{
+    say('3D 지도를 불러오는 중입니다…');
+    await ensureMap();
+    if(!last||last.k!==k)await drawMarkers(k);
+    msg.hidden=true;
+    last={k,n};
+    map.stopCameraAnimation&&map.stopCameraAnimation();
+    map.flyCameraTo({endCamera:camera(k,n),durationMillis:3500});
+  }catch(e){
+    say('3D 지도를 불러오지 못했습니다. 인터넷 연결이나 API 키 설정을 확인해 주세요.');
+  }
+}
+
+document.addEventListener('go3d',e=>go(e.detail.k,e.detail.n));
+document.getElementById('m3dspin').addEventListener('click',()=>{
+  if(!map||!last)return;
+  map.flyCameraAround({camera:camera(last.k,last.n),durationMillis:30000,rounds:1});
+});
+document.getElementById('m3dstop').addEventListener('click',()=>{if(map&&map.stopCameraAnimation)map.stopCameraAnimation()});
 }
 </script>
 <script>
