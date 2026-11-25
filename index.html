@@ -165,6 +165,12 @@ footer{padding:24px max(5vw,16px);font-size:14px;color:var(--mute);text-align:ce
 .m3d-box gmp-map-3d{display:block;width:100%;height:100%}
 .m3d-msg{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:#e8f1f5;font-size:17px;line-height:1.6}
 .m3d-msg[hidden]{display:none}
+.m3d-x{position:absolute;top:max(12px,env(safe-area-inset-top));right:12px;z-index:5;display:none;min-height:44px;padding:8px 16px;border-radius:999px;border:0;background:rgba(0,0,0,.65);color:#fff;font:700 16px "Noto Sans KR",sans-serif;cursor:pointer}
+.m3d-box:fullscreen,.m3d-box.full{height:100%;border-radius:0;border:0}
+.m3d-box:-webkit-full-screen{height:100%;border-radius:0;border:0}
+.m3d-box.full{position:fixed;inset:0;z-index:1000;height:100dvh;width:100vw}
+.m3d-box:fullscreen .m3d-x,.m3d-box.full .m3d-x,.m3d-box:-webkit-full-screen .m3d-x{display:block}
+body.lock{overflow:hidden}
 </style>
 <script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
 </head>
@@ -274,9 +280,11 @@ footer{padding:24px max(5vw,16px);font-size:14px;color:var(--mute);text-align:ce
         <div class="m3d-btns">
           <button type="button" id="m3dspin">한 바퀴 돌아보기</button>
           <button type="button" id="m3dstop">멈추기</button>
+          <button type="button" id="m3dfull">전체화면</button>
         </div>
       </div>
       <div class="m3d-box" id="m3dbox">
+        <button type="button" class="m3d-x" id="m3dx">✕ 닫기</button>
         <div class="m3d-msg" id="m3dmsg"><div>위 지도에서 장소를 고른 뒤 <b>&nbsp;3D로 보기&nbsp;</b>를 누르면 실제 모습을 입체로 볼 수 있습니다.</div></div>
       </div>
       <p class="note">마우스로 끌면 회전, 휠(또는 두 손가락)로 확대·축소합니다. 방콕처럼 3D 건물 자료가 있는 곳은 건물이 입체로 보이고, 나머지 지역은 위성사진 위에 산과 지형만 입체로 보입니다.</p>
@@ -689,6 +697,21 @@ document.getElementById('m3dspin').addEventListener('click',()=>{
   map.flyCameraAround({camera:camera(last.k,last.n),durationMillis:30000,rounds:1});
 });
 document.getElementById('m3dstop').addEventListener('click',()=>{if(map&&map.stopCameraAnimation)map.stopCameraAnimation()});
+/* 전체화면: 브라우저 전체화면 기능을 쓰고, 지원하지 않는 아이폰 등에서는 화면을 꽉 채우는 방식으로 대신합니다 */
+const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
+function enterFull(){
+  const req=box.requestFullscreen||box.webkitRequestFullscreen;
+  if(req){try{const r=req.call(box);if(r&&r.catch)r.catch(()=>fakeFull(true));return}catch(e){}}
+  fakeFull(true);
+}
+function fakeFull(on){box.classList.toggle('full',on);document.body.classList.toggle('lock',on)}
+function exitFull(){
+  if(fsEl()){(document.exitFullscreen||document.webkitExitFullscreen).call(document)}
+  fakeFull(false);
+}
+document.getElementById('m3dfull').addEventListener('click',()=>{fsEl()||box.classList.contains('full')?exitFull():enterFull()});
+document.getElementById('m3dx').addEventListener('click',exitFull);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&box.classList.contains('full'))fakeFull(false)});
 }
 </script>
 <script>
