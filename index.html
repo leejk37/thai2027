@@ -35,6 +35,23 @@ h3{font-size:22px}
 .hero h1{font-size:clamp(36px,7vw,56px)}
 .hero p{margin:0;font-size:19px;color:#d8ece6}
 .dday{display:inline-block;margin-left:.2em;padding:0 .35em;border-radius:12px;background:var(--gold);color:#3a2700;white-space:nowrap}
+.tl{list-style:none;margin:0 0 28px;padding:0;border-left:3px solid var(--gold);margin-left:8px}
+.tl li{position:relative;padding:0 0 18px 22px}
+.tl li::before{content:"";position:absolute;left:-9px;top:8px;width:15px;height:15px;border-radius:50%;background:var(--gold);border:3px solid var(--bg)}
+.tl b{display:block;font:700 20px "Gowun Batang",serif;color:var(--jade)}
+:root[data-theme=dark] .tl b{color:var(--gold)}
+.ppl{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin-bottom:28px}
+.ppl div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.ppl b{display:block;font:700 20px "Gowun Batang",serif}
+.ppl span{font-size:14px;color:var(--mute)}
+.ppl p{margin:6px 0 0;font-size:16px}
+.wh td:first-child{white-space:nowrap;font-weight:700}
+.wh .mine{display:inline-block;font-size:13px;font-weight:700;color:#fff;background:var(--bkk);border-radius:6px;padding:0 8px;margin-left:6px}
+.econ{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
+.econ div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.econ b{display:block;font:700 28px "Gowun Batang",serif;color:var(--jade)}
+:root[data-theme=dark] .econ b{color:var(--gold)}
+.sub{font-size:24px;margin:8px 0 14px}
 .motto{margin:14px 0 0;padding:4px 0 4px 18px;border-left:4px solid var(--gold);font:400 clamp(18px,2.6vw,21px)/1.6 "Gowun Batang",serif;color:#fff;max-width:720px}
 .story{display:grid;gap:18px}
 .st{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px 28px;padding:22px;border-radius:16px;background:var(--card);border:1px solid var(--line);border-left:8px solid var(--c)}
@@ -172,7 +189,7 @@ footer{padding:24px max(5vw,16px);font-size:14px;color:var(--mute);text-align:ce
 </header>
 
 <nav class="scroll" aria-label="바로가기">
-  <a href="#map">지도</a><a href="#story">땅과 사람 이야기</a><a href="#plan">일정</a><a href="#weather">날씨</a><a href="#entry">입국 준비</a><a href="#pack">준비물</a><a href="#tips">생활 팁</a><a href="#sos">긴급 연락처</a>
+  <a href="#map">지도</a><a href="#story">땅과 사람 이야기</a><a href="#know">태국 이해하기</a><a href="#plan">일정</a><a href="#weather">날씨</a><a href="#entry">입국 준비</a><a href="#pack">준비물</a><a href="#tips">생활 팁</a><a href="#sos">긴급 연락처</a>
 </nav>
 
 <section class="band">
@@ -246,6 +263,67 @@ footer{padding:24px max(5vw,16px);font-size:14px;color:var(--mute);text-align:ce
         <p class="do"><b>가서 해 볼 것</b> — 올드타운 옛 상점가를 천천히 걸으며 건물 이야기 찾기, 현지식 아침(딤섬과 국수) 먹어 보기.</p>
       </article>
     </div>
+  </div>
+</section>
+
+<section class="band alt" id="know">
+  <div class="wrap">
+    <h2>태국 이해하기</h2>
+    <p class="note" style="margin:-6px 0 22px">역사·인물·세계유산·경제를 알고 가면 사원과 거리가 다르게 보입니다.</p>
+
+    <h3 class="sub">한눈에 보는 역사</h3>
+    <ol class="tl">
+      <li><b>기원전 수천 년</b>반치앙 사람들이 벼농사를 짓고 청동기와 무늬 토기를 만들었습니다(세계유산).</li>
+      <li><b>1238년 · 수코타이 왕국</b>태국 사람이 세운 첫 왕국. 람캄행 대왕이 태국 문자를 만들었습니다.</li>
+      <li><b>1296년 · 란나 왕국</b>북부에 치앙마이를 수도로 한 또 다른 나라가 섰습니다.</li>
+      <li><b>1350~1767년 · 아유타야 왕국</b>400여 년 번성한 국제 무역 도시. 1767년 버마군에게 무너졌습니다.</li>
+      <li><b>1767년 · 톤부리 왕조</b>딱신 왕이 나라를 되찾고 강 서쪽 톤부리에 수도를 세웠습니다.</li>
+      <li><b>1782년 · 방콕(짜끄리 왕조)</b>라마 1세가 강 동쪽에 방콕을 세웠습니다. 지금 왕실이 이 왕조입니다.</li>
+      <li><b>1932년 · 입헌군주제</b>절대왕정이 끝나고 헌법과 의회가 생겼습니다. 1939년 나라 이름을 "시암"에서 "타이"로 바꿨습니다.</li>
+    </ol>
+
+    <h3 class="sub">어떻게 식민지가 되지 않았을까</h3>
+    <div class="tips" style="margin-bottom:28px">
+      <div><h3>두 강대국 사이의 완충국</h3><p>서쪽(미얀마·말레이)은 영국, 동쪽(라오스·캄보디아)은 프랑스가 차지했습니다. 두 나라는 직접 부딪히지 않으려고 사이에 태국을 남겨 두는 편이 낫다고 여겼습니다.</p></div>
+      <div><h3>스스로 바꾼 근대화</h3><p>몽꿋 왕과 쭐랄롱꼰 왕은 서양 문물을 먼저 배워 노예제를 없애고, 철도·학교·근대 행정을 갖췄습니다. "문명국"이라는 명분을 지킨 것입니다.</p></div>
+      <div><h3>땅을 내주고 나라를 지킨 외교</h3><p>라오스와 캄보디아 일부, 말레이 남부의 땅을 프랑스·영국에 넘겨주는 아픈 선택으로 나라의 중심을 지켰습니다.</p></div>
+    </div>
+
+    <h3 class="sub">존경받는 인물</h3>
+    <div class="ppl">
+      <div><b>람캄행 대왕</b><span>수코타이 · 13세기</span><p>태국 문자를 만든 왕.</p></div>
+      <div><b>나레쑤언 대왕</b><span>아유타야 · 16세기</span><p>버마에서 독립을 되찾았고, 코끼리 위 결투로 유명합니다.</p></div>
+      <div><b>딱신 왕</b><span>톤부리 · 18세기</span><p>아유타야가 무너진 뒤 나라를 다시 일으켰습니다.</p></div>
+      <div><b>쭐랄롱꼰 대왕(라마 5세)</b><span>1868~1910년 재위</span><p>근대화로 독립을 지킨 왕. 지금도 가장 사랑받습니다.</p></div>
+      <div><b>푸미폰 국왕(라마 9세)</b><span>1946~2016년 재위</span><p>70년 동안 재위하며 농촌 개발에 힘썼습니다.</p></div>
+    </div>
+
+    <h3 class="sub">유네스코 세계유산 9곳</h3>
+    <table class="wh stack" style="margin-bottom:10px">
+      <thead><tr><th>이름</th><th>종류</th><th>등재</th><th>이야기</th></tr></thead>
+      <tbody>
+        <tr><td>수코타이 역사도시</td><td>문화</td><td>1991</td><td>태국 첫 왕국의 수도</td></tr>
+        <tr><td>아유타야 역사도시<span class="mine">이번 일정</span></td><td>문화</td><td>1991</td><td>400여 년 번성한 왕국의 수도</td></tr>
+        <tr><td>툰야이-후아이카캥</td><td>자연</td><td>1991</td><td>서부 미얀마 국경의 야생동물 보호구역</td></tr>
+        <tr><td>반치앙 유적</td><td>문화</td><td>1992</td><td>동남아 선사 농경·청동기 문화</td></tr>
+        <tr><td>동파야옌-카오야이 숲</td><td>자연</td><td>2005</td><td>야생 코끼리가 사는 큰 숲</td></tr>
+        <tr><td>깽끄라짠 숲</td><td>자연</td><td>2021</td><td>태국 최대 국립공원이 있는 숲</td></tr>
+        <tr><td>시텝 고대도시</td><td>문화</td><td>2023</td><td>드바라바티 시대의 옛 도시</td></tr>
+        <tr><td>푸프라밧</td><td>문화</td><td>2024</td><td>바위 사이의 옛 불교 경계석(세마석)</td></tr>
+        <tr><td>왓프라마핫(나콘시탐마랏)</td><td>문화</td><td>2026</td><td>8세기부터 이어진 남부 불교의 중심 사원</td></tr>
+      </tbody>
+    </table>
+    <p class="note" style="margin-bottom:28px">이번에 가는 치앙마이와 방콕 왓아룬의 탑도 세계유산 등재를 추진 중입니다.</p>
+
+    <h3 class="sub">주요 산업과 경제</h3>
+    <div class="econ">
+      <div><b>동남아 2위</b><p>인도네시아 다음으로 큰 경제. 관광·수출·제조업이 이끕니다.</p></div>
+      <div><b>제조업 25%</b><p>GDP의 4분의 1, 일자리 약 620만 개. 자동차를 많이 만들어 "아시아의 디트로이트"로 불리고 전자부품도 주력입니다.</p></div>
+      <div><b>쌀·고무·과일</b><p>쌀과 천연고무, 두리안 같은 열대과일을 세계적으로 많이 수출하는 농업 강국입니다.</p></div>
+      <div><b>관광객 약 3,300만 명</b><p>2025년 외국인 관광객 수. 관광은 나라 경제의 큰 기둥입니다.</p></div>
+      <div><b>성장률 약 2.5%</b><p>2026년 예상치. 수출과 투자는 늘지만 가계 빚과 고령화가 숙제입니다.</p></div>
+    </div>
+    <p class="note">경제 수치는 2026년 11월 기준 태국 정부(국가경제사회개발위원회)·세계은행 발표를 바탕으로 했습니다.</p>
   </div>
 </section>
 
