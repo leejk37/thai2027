@@ -68,6 +68,11 @@ h3{font-size:22px}
 .kr h4{margin:0 0 6px;font:700 22px "Gowun Batang",serif}
 .kr .meta{font-size:15px;color:var(--mute);margin:0 0 12px}
 .kr ol{margin:8px 0 0;padding-left:1.2em}.kr li{margin:4px 0}
+.ov{list-style:none;margin:14px 0 4px;padding:0;display:grid;gap:8px;max-width:760px}
+.ov li{display:grid;grid-template-columns:7.2em minmax(0,1fr);gap:12px;align-items:baseline;padding:10px 14px;border-radius:12px;background:rgba(255,255,255,.1);font-size:17px;line-height:1.5;color:#eaf5f1}
+.ov span{word-break:keep-all}
+.ov b{font:700 17px "Gowun Batang",serif;color:var(--gold);white-space:nowrap}
+@media(max-width:600px){.ov li{grid-template-columns:minmax(0,1fr);gap:2px;font-size:16px}}
 .motto{margin:14px 0 0;padding:4px 0 4px 18px;border-left:4px solid var(--gold);font:400 clamp(18px,2.6vw,21px)/1.6 "Gowun Batang",serif;color:#fff;max-width:720px}
 .story{display:grid;gap:18px}
 .st{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px 28px;padding:22px;border-radius:16px;background:var(--card);border:1px solid var(--line);border-left:8px solid var(--c)}
@@ -189,6 +194,13 @@ body.lock{overflow:hidden}
     <h1>2027 '자자자' 태국여행 <span class="dday" id="dday">D-?</span></h1>
     <p>2027년 1월 13일(수) 출발 ~ 22일(금) 아침 귀국 · 방콕 3박 · 치앙마이 5박</p>
     <blockquote class="motto">여행은 낯선 곳의 자연과 사람의 문화를 몸으로 겪는 일입니다. 명소와 먹거리, 휴식은 그 일부일 뿐. 떠나기 전, 그 땅과 사람을 생각하며 먼저 설레어 봅시다.</blockquote>
+    <ol class="ov" aria-label="일정 한눈에">
+      <li><b>1/13 수</b><span>인천 → 방콕 도착, 방콕 3박</span></li>
+      <li><b>1/14~15</b><span>왕궁·왓포·왓아룬과 강 디너 크루즈 / 옛 수도 아유타야 당일</span></li>
+      <li><b>1/16 토</b><span>오전 짜뚜짝 주말시장 → 저녁 국내선으로 치앙마이, 5박</span></li>
+      <li><b>1/17~20</b><span>도이수텝 사원·일요 야시장·코끼리 보호구역·근교 나들이·올드시티</span></li>
+      <li><b>1/21 목</b><span>낮에 체크아웃 → 밤 비행기 → 1/22(금) 아침 인천 도착</span></li>
+    </ol>
   </div>
   <svg class="scene" viewBox="0 0 1200 380" role="img" aria-label="사원 탑과 야자수, 강 위로 방콕과 아유타야에서 치앙마이로 이어지는 여행 경로">
     <defs>
