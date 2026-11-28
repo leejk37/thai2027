@@ -130,6 +130,13 @@ nav.scroll a:focus-visible,button:focus-visible{outline:3px solid var(--gold);ou
 .wx div{border-radius:14px;padding:18px;background:var(--card);border:1px solid var(--line);border-top:6px solid var(--c)}
 .wx b{font-size:30px;font-family:"Gowun Batang",serif;white-space:nowrap}
 .alt{background:var(--jade2)}
+.stay{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.stay>div{background:var(--card);border:1px solid var(--line);border-top:6px solid var(--c);border-radius:14px;padding:18px}
+.stay .n{font-size:14px;font-weight:700;color:var(--c)}
+.stay h4{margin:2px 0 8px;font:700 22px "Gowun Batang",serif;word-break:keep-all}
+.stay p{margin:0 0 6px;font-size:16px}
+.stay a,.legs a{color:inherit}
+.sec3{margin:36px 0 12px}
 .steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:12px}
 .steps li{background:var(--card);border-radius:14px;padding:16px 18px 16px 64px;position:relative;border:1px solid var(--line)}
 .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:18px;top:14px;width:32px;height:32px;border-radius:50%;background:var(--gold);color:#3a2700;font-weight:700;display:grid;place-items:center}
@@ -223,7 +230,7 @@ body.lock{overflow:hidden}
 </header>
 
 <nav class="scroll" aria-label="바로가기">
-  <a href="#spots">명소 도감</a><a href="#map">지도</a><a href="#story">땅과 사람 이야기</a><a href="#know">태국 이해하기</a><a href="#plan">일정</a><a href="#weather">날씨</a><a href="#entry">입국 준비</a><a href="#pack">준비물</a><a href="#tips">생활 팁</a><a href="#sos">긴급 연락처</a>
+  <a href="#spots">명소 도감</a><a href="#map">지도</a><a href="#story">땅과 사람 이야기</a><a href="#know">태국 이해하기</a><a href="#plan">일정</a><a href="#stay">숙박·이동</a><a href="#weather">날씨</a><a href="#entry">입국 준비</a><a href="#pack">준비물</a><a href="#tips">생활 팁</a><a href="#sos">긴급 연락처</a>
 </nav>
 
 <section class="band">
@@ -440,7 +447,61 @@ body.lock{overflow:hidden}
   </div>
 </section>
 
-<section class="band" id="weather">
+<section class="band" id="stay">
+  <div class="wrap">
+    <h2>숙박과 이동</h2>
+    <p style="margin:0">도시마다 숙소 한 곳에 머물러 짐은 네 번만 풉니다. 4~7일째는 기사 딸린 차 한 대에 짐을 실은 채 옛 왕국 길을 따라 올라갑니다. 두 부부가 더블룸을 하나씩 쓰고, 같은 층 이웃한 방(또는 안쪽 문으로 이어진 커넥팅룸)을 부탁합니다.</p>
+
+    <h3 class="sec3">머무는 곳</h3>
+    <div class="stay">
+      <div style="--c:var(--bkk)"><span class="n">1~3일째 · 방콕 3박 · 짜오프라야 강변</span>
+        <h4><a href="https://luxuryescapes.com/inspiration/the-best-hotels-in-bangkok/" target="_blank" rel="noopener">샹그릴라 방콕</a></h4>
+        <p>지상철(BTS) 사판탁신역과 사톤 선착장이 호텔에 바로 붙어 있어 걷는 거리가 가장 짧습니다.</p>
+        <p>다른 후보: 차트리움 리버사이드(가격 대비 평이 아주 좋음), 아바니+ 리버사이드(강 건너 전망, 셔틀 보트로 오감).</p></div>
+      <div style="--c:var(--mid)"><span class="n">4일째 · 아유타야 1박 · 강가 역사지구</span>
+        <h4><a href="https://www.expedia.co.nz/Ayutthaya-Hotels-Sala-Ayutthaya.h8508910.Hotel-Information" target="_blank" rel="noopener">살라 아유타야</a></h4>
+        <p>역사공원까지 걸어서 1분. 강 건너 1353년에 지은 왓풋타이사완이 식당 창밖으로 보입니다.</p>
+        <p>다른 후보: 이우디아 온 더 리버(강가 부티크, 유적 맞은편).</p></div>
+      <div style="--c:var(--mid)"><span class="n">5~6일째 · 수코타이 2박 · 구시가지(역사공원 근처)</span>
+        <h4><a href="https://www.booking.com/city/th/sukhothai.html" target="_blank" rel="noopener">타이타이 수코타이 리조트</a></h4>
+        <p>티크 목조 가옥에 묵는 숙소로, 위치 평이 특히 좋습니다.</p>
+        <p>다른 후보: 르샴 수코타이(역사공원 바로 옆), 레전다 수코타이(공원에서 약 2km, 자전거 대여). 신시가지는 유적과 멀어 피합니다.</p></div>
+      <div style="--c:var(--cnx)"><span class="n">7~9일째 · 치앙마이 3박 · 올드시티(옛 성곽 안)</span>
+        <h4><a href="https://www.agoda.com/tamarind-village-hotel/hotel/chiang-mai-th.html" target="_blank" rel="noopener">타마린드 빌리지</a></h4>
+        <p>란나 양식 부티크 호텔. 조용하고 수영장·스파가 있으며, 사원과 일요 야시장까지 걸어갑니다.</p>
+        <p>다른 후보: 137 필라스 하우스(1889년 티크 저택, 객실 30개 정원 리조트), 라띠란나 리버사이드(핑강변 스파 리조트).</p></div>
+    </div>
+    <p class="note">1월은 성수기라 치앙마이 숙소가 가장 먼저 찹니다. 무료 취소·조식 포함 요금으로 일찍 잡아 둡니다.</p>
+
+    <h3 class="sec3">날짜별 이동</h3>
+    <table class="stack legs">
+      <thead><tr><th>날짜</th><th>구간</th><th>교통수단</th><th>걸리는 시간</th></tr></thead>
+      <tbody>
+        <tr><td>1일째</td><td>인천 → 방콕(수완나품 공항)</td><td>국제선 직항</td><td>약 6시간</td></tr>
+        <tr><td>1일째</td><td>공항 → 강변 호텔</td><td>그랩 큰 차(XL) 또는 미리 예약한 밴</td><td>45~60분</td></tr>
+        <tr><td>2~3일째</td><td>방콕 시내</td><td>관광 보트, 지상철(BTS), 그랩</td><td>—</td></tr>
+        <tr><td>4일째</td><td>방콕 → 아유타야</td><td>기사 딸린 차(여기서부터 7일째까지 같은 차)</td><td>약 1시간 30분</td></tr>
+        <tr><td>5일째</td><td>아유타야 → 롭부리 → 핏사눌록 → 수코타이</td><td>같은 차, 2시간마다 휴식</td><td>5시간 안팎</td></tr>
+        <tr><td>7일째</td><td>수코타이 → 람빵 → 치앙마이</td><td>같은 차, 치앙마이에서 헤어짐</td><td>람빵에서 약 1시간 30분</td></tr>
+        <tr><td>8~9일째</td><td>치앙마이 시내·근교</td><td>그랩, 썽태우</td><td>—</td></tr>
+        <tr><td>10일째</td><td>치앙마이 → 인천</td><td><a href="https://www.hotelscombined.co.kr/flight-routes/Incheon-Intl-ICN/Chiang-Mai-CNX.ksp" target="_blank" rel="noopener">국제선 직항</a> 또는 방콕 경유</td><td>직항 약 5시간 15분</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="sec3">교통수단 알아두기</h3>
+    <div class="tips">
+      <div><h3>방콕 공항철도</h3><p><a href="https://blog.wego.com/bangkok-airport-transfer/" target="_blank" rel="noopener">공항에서 파야타이역까지 30분 안쪽, 1인 45바트</a>부터입니다. 다만 3명 이상이고 짐이 많으면 택시나 그랩이 더 편하고 경제적입니다.</p></div>
+      <div><h3>방콕 공항 택시</h3><p><a href="https://suvarnabhumi.airportthai.co.th/service/airport-guide/detail/Transportation_BKK" target="_blank" rel="noopener">1층 4~7번 게이트</a>에서 번호표를 뽑고 탑니다. 미터 요금에 공항 추가금 50바트와 고속도로 통행료가 붙고, 대개 현금만 받습니다. 안에서 말을 거는 호객꾼은 피하세요.</p></div>
+      <div><h3>방콕 관광 보트</h3><p><a href="https://thaiest.com/thailand/bangkok/river-boats" target="_blank" rel="noopener">파란 깃발 관광 보트</a>는 사톤 선착장에서 왕궁·왓포 쪽 프라아팃 선착장까지 오가고, 11시 30분부터는 아시아티크까지 갑니다. 값싼 주황 깃발 보트는 <a href="https://thaiest.com/thailand/bangkok/orange-flag-boat" target="_blank" rel="noopener">평일 낮과 주말에 다니지 않으니</a> 관광 보트를 타세요.</p></div>
+      <div><h3>치앙마이 공항</h3><p>올드시티까지 <a href="https://airconnect.live/en/airports/chiang-mai-airport-transport-guide" target="_blank" rel="noopener">약 3km, 그랩으로 10~15분(100~180바트)</a>입니다. 공항 택시는 <a href="https://www.nomadotravel.app/en/guides/getting-around-chiang-mai" target="_blank" rel="noopener">150바트에 공항 추가금 50바트</a>로 요금이 정해져 있습니다.</p></div>
+      <div><h3>썽태우(빨간 트럭)</h3><p>픽업트럭 짐칸에 긴 의자를 놓은 합승차로, 치앙마이 사람들의 버스입니다. <a href="https://airconnect.live/en/airports/chiang-mai-airport-transport-guide" target="_blank" rel="noopener">1인 40~80바트</a>이고 타기 전에 값을 정합니다. 뒤칸이 높으니 오르내릴 때 조심하세요.</p></div>
+      <div><h3>새벽 출국이면</h3><p>새벽에는 썽태우를 찾기 어렵습니다. <a href="https://unchartedlens.com/routes/thailand/chiang-mai-city-center-to-airport/" target="_blank" rel="noopener">전날 밤 그랩을 예약하거나 호텔에 택시를 부탁</a>해 둡니다.</p></div>
+    </div>
+    <p class="note">요금과 운항 정보는 2026년 11월 기준이며 바뀔 수 있습니다. 인천–방콕 비행시간은 일반적인 직항 기준 어림값입니다.</p>
+  </div>
+</section>
+
+<section class="band alt" id="weather">
   <div class="wrap">
     <h2>1월 날씨와 옷차림</h2>
     <div class="wx">
@@ -452,7 +513,7 @@ body.lock{overflow:hidden}
   </div>
 </section>
 
-<section class="band alt" id="entry">
+<section class="band" id="entry">
   <div class="wrap">
     <h2>입국 준비</h2>
     <ol class="steps">
@@ -465,7 +526,7 @@ body.lock{overflow:hidden}
   </div>
 </section>
 
-<section class="band" id="pack">
+<section class="band alt" id="pack">
   <div class="wrap">
     <h2>준비물 체크</h2>
     <p id="ptext" style="margin:0">0개 중 0개 준비</p>
@@ -475,7 +536,7 @@ body.lock{overflow:hidden}
   </div>
 </section>
 
-<section class="band alt" id="tips">
+<section class="band" id="tips">
   <div class="wrap">
     <h2>알아두면 편한 것</h2>
     <div class="tips">
