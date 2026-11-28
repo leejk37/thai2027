@@ -249,7 +249,7 @@ body.lock{overflow:hidden}
     <h2>한눈에 보기</h2>
     <div class="facts">
       <div class="fact"><b>4명</b><span>두 가족이 함께</span></div>
-      <div class="fact"><b>1월 13일~21일</b><span>수요일 출발, 21일 밤 비행기로 귀국(안) · 건기, 여행하기 가장 좋은 때</span></div>
+      <div class="fact"><b>1월 13일~21일</b><span>수요일 출발 확정, 21일 밤 비행기로 귀국 · 건기, 여행하기 가장 좋은 때</span></div>
       <div class="fact"><b>두 도시</b><span>방콕 3박 · 치앙마이 5박 · 아유타야는 방콕에서 당일</span></div>
       <div class="fact"><b>한국보다 2시간 느림</b><span>한국 오후 3시 = 태국 오후 1시</span></div>
     </div>
@@ -576,7 +576,7 @@ body.lock{overflow:hidden}
 <script>
 {
 // 출발일이 정해지면 아래 날짜를 'YYYY-MM-DD' 형식으로 넣으면 D-day가 자동 계산됩니다.
-const DEPART='2027-01-13'; // 항공권 예약 후 확정
+const DEPART='2027-01-13'; // 출발일 확정
 const el=document.getElementById('dday');
 if(DEPART){const t=new Date(DEPART+'T00:00:00+09:00'),n=new Date(),k=new Date(n.toLocaleString('en-US',{timeZone:'Asia/Seoul'}));k.setHours(0,0,0,0);
 const d=Math.round((new Date(t.toLocaleString('en-US',{timeZone:'Asia/Seoul'}))-k)/864e5);el.textContent=d>0?'D-'+d:d===0?'D-DAY':'여행 중·다녀옴';}
